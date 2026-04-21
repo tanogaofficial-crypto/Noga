@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>For You 💌</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffc0cb, #ff9eb5);
+      overflow: hidden;
+      color: #b45656;
+    }
+
+    .page {
+      display: none;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .active {
+      display: flex;
+    }
+
+    .corner-img {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+    
+    .top-center-img {
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+     
+    }
+
+    /* 🌸 CONTAINER CARD */
+    .card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+      padding: 25px;
+      border-radius: 20px;
+      text-align: center;
+      width: 320px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .cardfinal {
+      position: relative;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+      padding: 25px;
+      border-radius: 20px;
+      text-align: center;
+      width: 550px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    /* 🍓 STRAWBERRY */
+    .strawberry {
+      position: absolute;
+      font-size: 50px;
+      opacity: 0.7;
+      animation: float 6s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-25px); }
+      100% { transform: translateY(0px); }
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 15px;
+      background-color: #ff6f91;
+      color: white;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #ff3e6c;
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      width: 90%;
+      margin-top: 10px;
+    }
+
+    /* PAGE 2 */
+    .heart {
+      font-size: 70px;
+      cursor: pointer;
+      margin: 10px 0;
+    }
+
+    .progress-container {
+      width: 100%;
+      height: 18px;
+      background: rgba(255,255,255,0.4);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #ff4d6d;
+    }
+
+    /* PAGE 3 */
+    .image-box {
+      width: 100%;
+      height: 250px;
+      border-radius: 15px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* PAGE 4 */
+    .end {
+      margin-top: 20px;
+      opacity: 0;
+      transition: 1s;
+    }
+
+    .show {
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+
+<!------AUDIO------->
+<audio autoplay loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGE 1 -->
+<div id="page1" class="page active">
+  <div class="strawberry" style="top:10%; left:10%;">🍓</div>
+  <div class="strawberry" style="top:50%; left:15%;">🍓</div>
+  <div class="strawberry" style="top:10%; right:10%;">🍓</div>
+  <div class="strawberry" style="top:50%; right:15%;">🍓</div>
+
+
+
+  <div class="card">
+    <img src="zolociqita.png" class="top-center-img">
+    <h2>🔐 Adek Only</h2>
+    <p>(clue: kesukaan abang 😏)</p>
+    <input type="password" id="pass">
+    <button onclick="checkPass()">Masuk</button>
+    <p id="msg1"></p>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2" class="page">
+  <div class="strawberry" style="top:15%; left:10%;">🍓</div>
+  <div class="strawberry" style="top:80%; left:85%;">🍓</div>
+
+  <div class="card">
+    <h2>Tap lovenya 💗</h2>
+    <div class="heart" onclick="addLove()">💖</div>
+
+    <div class="progress-container">
+      <div class="progress-bar" id="bar"></div>
+    </div>
+
+    <p id="msg2"> pelan pelan ya😝</p>
+
+    <button id="next2" onclick="goPage(3)" style="display:none;">lanjut yang 💌</button>
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div id="page3" class="page">
+  <div class="strawberry" style="top:10%; left:20%;">🍓</div>
+  <div class="strawberry" style="top:80%; left:70%;">🍓</div>
+
+  <div class="card">
+    <div class="image-box">
+      <img id="photo" src="foto1.jpg">
+    </div>
+
+    <p id="text"></p>
+    <button onclick="nextSlide()">Tap 💗</button>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div id="page4" class="page">
+  <div class="strawberry" style="top:10%; left:15%;">🍓</div>
+  <div class="strawberry" style="top:75%; left:75%;">🍓</div>
+
+  <div class="cardfinal">
+    <img src="zolociqita.png" class="top-center-img">
+    <h2>Untuk April 💌</h2>
+    <p id="finalText"></p>
+
+    <button onclick="showEnding()">💖 Tap</button>
+
+    <div id="ending" class="end">
+      💗 I love you, always.. maaf kalo sederhana ya sayangku 💗
+      <br><br>
+      <a href="https://wa.me/6282283571009">
+        <button>💌 Balas Abang</button>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+function goPage(n) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page'+n).classList.add('active');
+}
+
+/* PAGE 1 */
+function checkPass() {
+  let pass = document.getElementById("pass").value.toLowerCase();
+  if(pass === "barcelona") {
+    goPage(2);
+  } else {
+    document.getElementById("msg1").innerText = "Wlee salah 😝 coba lagi!";
+  }
+}
+
+/* PAGE 2 */
+let love = 0;
+function addLove() {
+  if(love < 100) {
+    love += 10;
+    document.getElementById("bar").style.width = love + "%";
+
+    if(love < 50) {
+      msg2.innerText = "kurang yang... 😝";
+    } else if(love < 100) {
+      msg2.innerText = "nah gitu, terus 😳💗";
+    } else {
+      msg2.innerText = "udah penuh banar... kayak rasa abang ke ade😝💛";
+      document.getElementById("next2").style.display = "block";
+    }
+  }
+}
+
+/* PAGE 3 */
+let index = 0;
+const slides = [
+  {img:"foto1.jpg", text:"Abang gak nyangka bisa ketemu ade 😌"},
+  {img:"foto2.jpg", text:"Walaupun abang sering buat salah... ade tetap bertahan 🥺"},
+  {img:"foto3.jpg", text:"adanya ade bikin hidup abang lebih berwarna sayang 💛"},
+  {img:"foto4.jpg", text:"Selamat ulang tahun ya sayangku belangiku 🎂💗"}
+];
+
+function nextSlide() {
+  index++;
+  if(index < slides.length) {
+    document.getElementById("photo").src = slides[index].img;
+    typeText(slides[index].text, document.getElementById("text"));
+  } else {
+    goPage(4);
+    typeText(finalMessage, document.getElementById("finalText"));
+  }
+}
+
+/* PAGE 4 */
+const finalMessage = `
+Selamat ulang tahun ya… cewe stroberi aku 🍓
+
+Gimana ya… lucu aja sih kalau diinget, kita kenal dari game doang. Dari yang awalnya cuma ngobrol iseng, sampai sekarang malah jadi sejauh ini. Jujur, aku nggak pernah nyangka bakal nemuin kamu dari situ.
+
+Sejak kamu ada, hidup aku jadi lebih berwarna. Bukan cuma soal senang-senang, tapi juga tentang gimana kamu selalu berusaha ada buat aku… bahkan sering banget kamu lebih mikirin kebahagiaan aku daripada diri kamu sendiri.
+
+Aku tahu kamu itu kadang cemburuan, suka ngeyel, terus sensi juga… tapi ya itu kamu 😄 dan entah kenapa aku malah nyaman sama semuanya itu. Karena di balik itu, kamu selalu mau dengerin aku juga, apalagi kalau aku udah serius.
+
+Dan aku juga mau minta maaf… karena aku sadar aku belum jadi yang terbaik buat kamu. Aku pernah salah, pernah bikin kamu capek, bahkan mungkin bikin kamu ngerasa kewalahan. Tapi kamu tetap bertahan… tetap milih buat maafin aku. Itu nggak pernah aku anggap hal kecil, aku bener-bener hargai itu.
+
+Aku bangga sama kamu, apalagi soal kamu yang lagi fokus ke karir kamu sekarang. Kamu hebat sih, serius. Aku cuma bisa doain dari jauh, semoga semua yang kamu kejar pelan-pelan tercapai.
+
+Walaupun kita LDR, cuma ketemu lewat chat sama suara doang… tapi aku ngerasa kamu itu nyata banget di hidup aku. Dan aku harap, suatu hari nanti kita bisa ketemu beneran. Nggak cuma lewat layar lagi.
+
+Dan satu hal lagi… aku juga mau kamu bahagia. Bukan cuma bahagiain aku terus, tapi kamu juga harus ngerasain kebahagiaan kamu sendiri. Aku pengen lihat kamu senyum karena hidup kamu juga baik ke kamu.
+
+Dari pertama aku manggil kamu “cewe stroberi”… sampai sekarang kamu jadi orang yang selalu aku tunggu setiap hari. Makasih ya, udah hadir dan bertahan sejauh ini.
+
+Semoga di umur kamu yang sekarang, kamu makin bahagia, makin kuat, dan tetap jadi kamu yang aku kenal.
+
+Dan… aku bakal terus belajar buat jadi lebih baik, buat kamu.
+
+Aku sayang kamu 🤍
+`;
+
+function showEnding() {
+  document.getElementById("ending").classList.add("show");
+}
+
+/* TYPE EFFECT */
+function typeText(text, el, speed=50) {
+  el.innerHTML = "";
+  let i = 0;
+  function typing() {
+    if(i < text.length) {
+      el.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing, speed);
+    }
+  }
+  typing();
+}
+
+/* INIT */
+typeText(slides[0].text, document.getElementById("text"));
+</script>
+
+</body>
+</html>
